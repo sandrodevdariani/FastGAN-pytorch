@@ -203,18 +203,23 @@ class DownBlock(nn.Module):
 
 
 class DownBlockComp(nn.Module):
-    def __init__(self, in_channels, out_channels):
+    def __init__(self, in_planes, out_planes):
         super(DownBlockComp, self).__init__()
+
         self.main = nn.Sequential(
-            conv2d(in_channels, out_channels, 4, 2, 1, bias=False),
-            batchNorm2d(out_channels),
-            nn.LeakyReLU(0.2, inplace=True),
-        )
-        self.direct = conv2d(in_channels, out_channels, 4, 2, 1, bias=False)
+            conv2d(in_planes, out_planes, 4, 2, 1, bias=False),
+            batchNorm2d(out_planes), nn.LeakyReLU(0.2, inplace=True),
+            conv2d(out_planes, out_planes, 3, 1, 1, bias=False),
+            batchNorm2d(out_planes), nn.LeakyReLU(0.2)
+            )
+
+        self.direct = nn.Sequential(
+            nn.AvgPool2d(2, 2),
+            conv2d(in_planes, out_planes, 1, 1, 0, bias=False),
+            batchNorm2d(out_planes), nn.LeakyReLU(0.2))
 
     def forward(self, feat):
         return (self.main(feat) + self.direct(feat)) / 2
-
 
 
 class Discriminator(nn.Module):
