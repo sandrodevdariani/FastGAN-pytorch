@@ -171,6 +171,8 @@ class Generator(nn.Module):
 
         feat_256 = self.se_256( feat_16, self.feat_256(feat_128) )
 
+        if self.im_size == 128:
+            return [self.to_128(feat_128), torch.tanh(self.to_128(feat_128))]
 
         if self.im_size == 256:
             return [self.to_big(feat_256), self.to_128(feat_128)]
