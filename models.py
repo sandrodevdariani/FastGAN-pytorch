@@ -251,7 +251,7 @@ class Discriminator(nn.Module):
 
         elif im_size == 128:
             self.down_from_big = nn.Sequential(
-                                    conv2d(nc, nfc[128], 4, 2, 1, bias=False),
+                                    conv2d(nc, nfc[128], 1, 2, 1, bias=False),
                                     nn.LeakyReLU(0.2, inplace=True))
 
 
