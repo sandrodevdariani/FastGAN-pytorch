@@ -139,7 +139,6 @@ class Generator(nn.Module):
         self.feat_128 = UpBlockComp(nfc[64], nfc[128])  
         self.feat_256 = UpBlock(nfc[128], nfc[256]) 
         self.feat_512 = UpBlockComp(nfc[256], nfc[512]) 
-        self.feat_1024 = UpBlock(nfc[512], nfc[1024])  
 
 
 
