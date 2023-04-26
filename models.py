@@ -120,7 +120,7 @@ def UpBlockComp(in_planes, out_planes):
 
 
 class Generator(nn.Module):
-    def __init__(self, ngf=64, nz=100, nc=3, im_size=128):
+    def __init__(self, ngf=64, nz=100, nc=3, im_size=64):
         super(Generator, self).__init__()
 
         nfc_multi = {4:16, 8:8, 16:4, 32:2, 64:2, 128:1, 256:0.5, 512:0.25, 1024:0.125}
@@ -171,9 +171,6 @@ class Generator(nn.Module):
 
         feat_256 = self.se_256( feat_16, self.feat_256(feat_128) )
 
-        if self.im_size == 128:
-            im_128 = torch.tanh(self.to_128(self.se_256(feat_128)))
-            return im_128
 
         if self.im_size == 256:
             return [self.to_big(feat_256), self.to_128(feat_128)]
