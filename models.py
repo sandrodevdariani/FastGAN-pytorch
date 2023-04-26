@@ -123,7 +123,7 @@ class Generator(nn.Module):
     def __init__(self, ngf=64, nz=100, nc=3, im_size=1024):
         super(Generator, self).__init__()
 
-        nfc_multi = {4:16, 8:8, 16:4, 32:2, 64:2, 128:1, 256:0.5, 512:0.25, 1024:0.125}
+        nfc_multi = {4:16, 8:8, 16:4, 32:2, 64:4, 128:1, 256:0.5, 512:0.25, 1024:0.125}
         nfc = {}
         for k, v in nfc_multi.items():
             nfc[k] = int(v*ngf)
