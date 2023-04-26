@@ -254,6 +254,12 @@ class Discriminator(nn.Module):
                                     conv2d(nc, nfc[128], 1, 2, 1, bias=False),
                                     nn.LeakyReLU(0.2, inplace=True))
 
+        elif im_size == 64:
+            self.down_from_big = nn.Sequential(
+                                    conv2d(nc, nfc[64], 4, 2, 1, bias=False),
+                                    nn.LeakyReLU(0.2, inplace=True))
+                            
+
 
 
         self.down_4  = DownBlockComp(nfc[512], nfc[256])
