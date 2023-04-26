@@ -142,6 +142,8 @@ class Generator(nn.Module):
         self.se_64  = SEBlock(nfc[4], nfc[64])
         self.se_128 = SEBlock(nfc[8], nfc[128])
         self.se_256 = SEBlock(nfc[16], nfc[256])
+        self.se_512 = SEBlock(nfc[32], nfc[512])
+
 
         self.to_128 = conv2d(nfc[128], nc, 1, 1, 0, bias=False) 
         self.to_big = conv2d(nfc[im_size], nc, 3, 1, 1, bias=False) 
